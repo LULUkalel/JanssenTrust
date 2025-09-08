@@ -1,0 +1,38 @@
+Mémo GitHub + VS Code (Mac & Windows)
+
+1. Ouvrir ton projet
+- Toujours ouvrir le dossier cloné du repo (JanssenTrust) dans VS Code.
+- Terminal intégré :
+  - Mac : Ctrl + ` (accent grave) ou ⌘ + J → puis onglet Terminal.
+  - Windows : Ctrl + ` aussi.
+
+2. Avant de commencer à coder (mettre à jour)
+git pull
+
+3. Travailler
+- Modifier tes fichiers (index.html, merci.html, assets/...).
+- Tester en local avec l’extension Live Server (clic droit → Open with Live Server).
+
+4. Sauvegarder tes changements
+git add .
+git commit -m "Message clair sur mes modifs"
+git push
+
+5. Quand tu changes d’ordinateur
+- Avant de commencer sur l’autre machine → git pull
+- Continue à travailler → git add . + git commit -m "..." + git push
+
+Mini-routine express (toujours la même)
+git pull
+git add .
+git commit -m "Ton message"
+git push
+
+Vérification rapide
+- git status → voir si fichiers modifiés ou à push.
+- Si conflit : résoudre dans VS Code → git add . && git commit -m "Résolution de conflit" && git push.
+
+Résultat
+- Tu bosses où tu veux (Mac ou Windows).
+- GitHub garde la version centrale.
+- Netlify redéploie ton site à chaque push.
