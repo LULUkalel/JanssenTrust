@@ -25,29 +25,56 @@
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <h1 class="text-3xl md:text-4xl font-bold">Histoire de Janssen Trust</h1>
-    <p class="mt-3 text-white/70 max-w-3xl">Origines, valeurs fondatrices, jalons clés, et vision long-terme pour les clients internationaux.</p>
+    <p class="mt-3 text-white/70 max-w-3xl">Journal / autobiographie quotidienne (politique, philanthropie, superyachts, vécu).</p>
 
-    <section class="mt-8 space-y-6">
-      <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-        <h2 class="font-semibold">Origines</h2>
-        <p class="mt-2 text-white/70 text-sm">Raconte ici la genèse, les premières années, et les motivations stratégiques.</p>
-      </div>
-      <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-        <h2 class="font-semibold">Jalons</h2>
-        <ul class="mt-2 text-white/70 text-sm list-disc pl-5 space-y-1">
-          <li>Année — Événement remarquable</li>
-          <li>Année — Expansion / Partenariat</li>
-          <li>Année — Lancement d’un produit</li>
-        </ul>
-      </div>
-      <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-        <h2 class="font-semibold">Vision</h2>
-        <p class="mt-2 text-white/70 text-sm">Ce que tu veux bâtir pour les 5–10 prochaines années (marchés, tech, clients).</p>
-      </div>
-    </section>
+    <!-- FEED SUPABASE -->
+    <section id="feed" class="mt-8 space-y-6"></section>
   </main>
 
   <footer class="border-t border-white/10 py-8 text-xs text-white/60 text-center">© <span id="y"></span> WealthElite — NY / Dubai</footer>
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+  <script>
+    // Année dans le footer
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // -------- Supabase Feed --------
+    const SUPABASE_URL = "https://YOUR-PROJECT.supabase.co";       // <-- remplace
+    const SUPABASE_ANON_KEY = "YOUR_ANON_KEY";                     // <-- remplace
+    const CATEGORY = "bio";                                        // histoire = bio
+
+    async function loadPosts() {
+      const url = `${SUPABASE_URL}/rest/v1/posts?select=*&category=eq.${CATEGORY}&order=created_at.desc`;
+      const res = await fetch(url, {
+        headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` }
+      });
+      const posts = await res.json();
+      renderPosts(posts);
+    }
+
+    function esc(s) {
+      return (s ?? "").toString().replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    }
+
+    function renderPosts(posts) {
+      const root = document.getElementById('feed');
+      if (!posts.length) {
+        root.innerHTML = `<div class="text-white/60">Aucune page d’histoire publiée pour le moment.</div>`;
+        return;
+      }
+      root.innerHTML = posts.map(p => `
+        <article class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <h2 class="font-semibold text-lg">${esc(p.title || 'Entrée de journal')}</h2>
+          ${p.link_url ? `<p class="mt-2 text-sm"><a class="text-blue-300 underline break-all" href="${esc(p.link_url)}" target="_blank" rel="noopener">Lien</a></p>` : ``}
+          ${p.media_url ? `<img src="${esc(p.media_url)}" alt="" class="mt-3 rounded-xl w-full h-auto"/>` : ``}
+          ${p.content ? `<p class="mt-3 text-white/80 text-sm whitespace-pre-wrap">${esc(p.content)}</p>` : ``}
+          <div class="mt-4 flex items-center justify-between text-xs text-white/50">
+            <span>${new Date(p.created_at).toLocaleString('fr-BE')}</span>
+            <span>${esc(p.author || '—')}</span>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', loadPosts);
+  </script>
 </body>
 </html>
