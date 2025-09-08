@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WealthElite New York — Dubai Division · v6</title>
+  <meta name="description" content="WealthElite NY — Dubai Division. Janssen Trust • Conseil stratégique & exécution marchés.">
+  <link rel="icon" href="https://fav.farm/🦋">
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 600: '#0c6cf3', 500: '#2f87ff', 400: '#5ea5ff' },
+            gold: { 500: '#d4b559' },
+            dark: '#0b1220'
+          },
+          boxShadow: { xlsoft: '0 25px 50px -12px rgba(0,0,0,.35)' }
+        }
+      }
+    }
+  </script>
+  <style>html{scroll-behavior:smooth}</style>
+</head>
+<body class="bg-dark text-white selection:bg-brand-500 selection:text-white">
+  <!-- Top bar -->
+  <div class="bg-black/30 backdrop-blur border-b border-white/10 text-center text-sm py-2">
+    <strong>WealthElite</strong> — NY / Dubai · <span class="opacity-80">Janssen Trust</span>
+  </div>
+
+  <!-- NAV -->
+  <header class="sticky top-0 z-40 bg-dark/80 backdrop-blur border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="#" class="flex items-center gap-3 font-semibold">
+          <!-- LOGO -->
+          <img src="assets/wealth_elite_logo.png" alt="WealthElite Logo" class="h-8 w-auto" onerror="this.style.display='none'">
+          <span class="hidden sm:inline opacity-70">NY / Dubai</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-8 text-sm">
+          <a href="informations.html" class="hover:text-brand-400">Informations</a>
+          <a href="histoire.html" class="hover:text-brand-400">Histoire</a>
+          <a href="actualites.html" class="hover:text-brand-400">Actualités</a>
+          <a href="#contact" class="hover:text-brand-400">Contact</a>
+          <a href="#contact" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-brand-600 hover:bg-brand-500 transition shadow-xlsoft">Devenir client</a>
+        </nav>
+
+        <button id="menuBtn" class="md:hidden inline-flex items-center justify-center p-2 rounded hover:bg-white/10">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M3.75 6.75h16.5v1.5H3.75v-1.5Zm0 4.5h16.5v1.5H3.75v-1.5Zm0 4.5h16.5v1.5H3.75v-1.5Z"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden border-t border-white/10">
+      <div class="px-4 py-3 space-y-2 text-sm">
+        <a href="informations.html" class="block py-2">Informations</a>
+        <a href="histoire.html" class="block py-2">Histoire</a>
+        <a href="actualites.html" class="block py-2">Actualités</a>
+        <a href="#contact" class="block py-2">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO v6 -->
+  <section class="relative overflow-hidden">
+    <div class="absolute -top-32 -right-32 h-80 w-80 bg-brand-600 rounded-full blur-3xl opacity-30"></div>
+    <div class="absolute -bottom-32 -left-32 h-96 w-96 bg-gold-500 rounded-full blur-3xl opacity-20"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+      <!-- Infographie cliquable (Facebook) -->
+      <div class="max-w-4xl mx-auto mb-10 select-none">
+        <a href="https://www.facebook.com/lcsjordan.smnnt/" target="_blank"
+           class="group block rounded-2xl border border-white/10 shadow-xlsoft overflow-hidden">
+          <img src="assets/janssen_trust1.png" alt="Janssen Trust — papillon blanc"
+               class="w-full h-auto object-cover group-hover:opacity-95 transition"/>
+        </a>
+        <p class="mt-2 text-center text-xs text-white/60">Cliquer l’infographie ouvre la page Facebook officielle.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+        <div>
+          <h1 class="text-4xl md:text-6xl font-bold leading-tight">
+            Accède aux marchés <span class="text-brand-400">comme un pro</span>
+          </h1>
+          <p class="mt-5 text-white/80 text-lg md:text-xl max-w-2xl">
+            Janssen Trust · Conseil stratégique, exécution sécurisée et reporting clair.
+          </p>
+          <div class="mt-8 flex flex-col sm:flex-row gap-3">
+            <a href="#contact" class="inline-flex justify-center items-center gap-2 px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 transition shadow-xlsoft">Parler à un expert</a>
+            <a href="#solutions" class="inline-flex justify-center items-center gap-2 px-6 py-3 rounded-xl border border-white/15 hover:bg-white/5">Solutions</a>
+          </div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-3xl p-6 md:p-8 shadow-xlsoft">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-white/5 rounded-2xl p-4"><p class="text-sm text-white/60">AUM cible</p><p class="text-2xl font-semibold">$50M+</p></div>
+            <div class="bg-white/5 rounded-2xl p-4"><p class="text-sm text-white/60">Actifs</p><p class="text-2xl font-semibold">Crypto • FX • Commodities</p></div>
+            <div class="bg-white/5 rounded-2xl p-4"><p class="text-sm text-white/60">Risque</p><p class="text-2xl font-semibold">Cadre pro (VaR)</p></div>
+            <div class="bg-white/5 rounded-2xl p-4"><p class="text-sm text-white/60">Support</p><p class="text-2xl font-semibold">NY & Dubai</p></div>
+          </div>
+          <div class="mt-6 text-sm text-white/60">* Informations à titre indicatif. Pas une sollicitation.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Expertise -->
+  <section id="expertise" class="py-16 md:py-24 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl md:text-4xl font-bold">Notre expertise</h2>
+        <p class="mt-3 text-white/70">Recherche fondamentale & on‑chain, exécution multi‑venues, gestion des risques.</p>
+      </div>
+      <div class="mt-10 grid md:grid-cols-3 gap-6">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6"><h3 class="font-semibold text-lg">Stratégie & Allocation</h3><p class="mt-2 text-white/70 text-sm">Portefeuilles, objectifs, horizon.</p></div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6"><h3 class="font-semibold text-lg">Exécution & Liquidité</h3><p class="mt-2 text-white/70 text-sm">OTC / exchanges, best‑execution.</p></div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6"><h3 class="font-semibold text-lg">Sécurité & Conformité</h3><p class="mt-2 text-white/70 text-sm">KYC/AML, garde, procédures.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solutions -->
+  <section id="solutions" class="py-16 md:py-24 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-10 items-start">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold">Solutions client</h2>
+          <p class="mt-3 text-white/70">Mandats, conseil, reporting, alertes (app/email/WhatsApp Business).</p>
+          <ul class="mt-6 space-y-3 text-white/80">
+            <li class="flex items-start gap-3"><span class="h-2 w-2 mt-2 bg-gold-500 rounded-full"></span> Mandats discrétionnaires & non‑discrétionnaires</li>
+            <li class="flex items-start gap-3"><span class="h-2 w-2 mt-2 bg-gold-500 rounded-full"></span> Comptes segregated & garde froide</li>
+            <li class="flex items-start gap-3"><span class="h-2 w-2 mt-2 bg-gold-500 rounded-full"></span> Rapports mensuels / trimestriels</li>
+            <li class="flex items-start gap-3"><span class="h-2 w-2 mt-2 bg-gold-500 rounded-full"></span> Accès deal‑flow & événements</li>
+          </ul>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <h3 class="font-semibold">Package « Dubai Division » (exemple)</h3>
+          <div class="mt-4 grid sm:grid-cols-2 gap-4">
+            <div class="bg-white/5 rounded-xl p-4"><p class="text-xs text-white/60">Ticket</p><p class="text-xl font-semibold">$100k – $5M</p></div>
+            <div class="bg-white/5 rounded-xl p-4"><p class="text-xs text-white/60">Horizon</p><p class="text-xl font-semibold">12–36 mois</p></div>
+            <div class="bg-white/5 rounded-xl p-4"><p class="text-xs text-white/60">Garde</p><p class="text-xl font-semibold">Cold + MPC</p></div>
+            <div class="bg-white/5 rounded-xl p-4"><p class="text-xs text-white/60">Reporting</p><p class="text-xl font-semibold">Mensuel</p></div>
+          </div>
+          <p class="mt-4 text-xs text-white/60">* Exemple indicatif. Suivant juridictions et contraintes réglementaires.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-16 md:py-24 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl md:text-4xl font-bold">Prise de contact</h2>
+        <p class="mt-3 text-white/70">Laisse tes coordonnées. Réponse rapide selon disponibilité.</p>
+      </div>
+
+<form action="https://formsubmit.co/simonnetlucas@hotmail.com" method="POST"
+      class="mt-8 grid md:grid-cols-2 gap-6 max-w-3xl">
+  <!-- Anti-spam (honeypot) -->
+  <input type="text" name="_honey" style="display:none">
+  <!-- Pas de captcha -->
+  <input type="hidden" name="_captcha" value="false">
+  <!-- Sujet reçu -->
+  <input type="hidden" name="_subject" value="Lead site — WealthElite / Janssen Trust">
+  <!-- Redirection après envoi (relative) -->
+  <input type="hidden" name="_next" value="merci.html">
+  <!-- Mise en forme jolie -->
+  <input type="hidden" name="_template" value="table">
+
+  <div class="flex flex-col gap-2">
+    <label class="text-sm text-white/70">Nom complet</label>
+    <input required name="Nom complet" type="text" placeholder="Entrez votre nom"
+           class="px-0 py-3 bg-transparent border-b border-white/25 focus:border-white/60 outline-none rounded-none" />
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <label class="text-sm text-white/70">Email</label>
+    <!-- IMPORTANT: _replyto pour améliorer la délivrabilité et le bouton Répondre -->
+    <input required name="_replyto" type="email" placeholder="vous@exemple.com"
+           class="px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-500" />
+  </div>
+
+  <div class="md:col-span-2 flex flex-col gap-2">
+    <label class="text-sm text-white/70">Message</label>
+    <textarea required name="Message" rows="5" placeholder="Parlez-nous de votre projet (budgets, délais, contraintes…)"
+              class="px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+  </div>
+
+  <div class="md:col-span-2 flex items-center justify-between gap-3">
+    <button type="submit" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 transition shadow-xlsoft">
+      Envoyer la demande
+    </button>
+    <p class="text-xs text-white/50">* Envoi direct — pas d’ouverture d’Outlook.</p>
+  </div>
+</form>
+
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10 py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-3 gap-8 items-start">
+        <div>
+          <div class="flex items-center gap-2 font-semibold">
+            <img src="assets/wealth_elite_logo.png" alt="WealthElite Logo" class="h-8 w-auto" onerror="this.style.display='none'">
+            <span>WealthElite</span>
+          </div>
+          <p class="mt-3 text-sm text-white/60">New York — Dubai Division · Janssen Trust</p>
+        </div>
+        <div>
+          <h4 class="font-semibold">Navigation</h4>
+          <ul class="mt-3 space-y-2 text-sm text-white/70">
+            <li><a href="#expertise" class="hover:text-white">Expertise</a></li>
+            <li><a href="#solutions" class="hover:text-white">Solutions</a></li>
+            <li><a href="#contact" class="hover:text-white">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold">Conformité</h4>
+          <p class="mt-3 text-xs text-white/60">Ce site ne constitue ni une offre, ni une sollicitation. Accès soumis à juridiction & KYC/AML.</p>
+        </div>
+      </div>
+      <div class="mt-8 pt-6 border-t border-white/10 text-xs text-white/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+        <p>© <span id="year"></span> WealthElite — NY / Dubai. Tous droits réservés.</p>
+        <div class="flex items-center gap-4">
+          <a href="#" class="hover:text-white">Mentions légales</a>
+          <a href="#" class="hover:text-white">Politique de confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  // menu mobile
+  const btn = document.getElementById('menuBtn');
+  const menu = document.getElementById('mobileMenu');
+  btn?.addEventListener('click', () => menu.classList.toggle('hidden'));
+  menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.add('hidden')));
+
+  // année footer
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+
+

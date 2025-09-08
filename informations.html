@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Informations – WealthElite / Janssen Trust</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#0b1220] text-white">
+  <div class="bg-black/30 border-b border-white/10 text-center text-sm py-2">WealthElite — NY / Dubai · Janssen Trust</div>
+  <header class="border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3 font-semibold">
+        <img src="assets/wealth_elite_logo.png" class="h-8" alt="Logo"/>
+        <span class="hidden sm:inline opacity-70">NY / Dubai</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm">
+        <a href="informations.html" class="text-brand-400">Informations</a>
+        <a href="histoire.html" class="hover:text-brand-400">Histoire</a>
+        <a href="actualites.html" class="hover:text-brand-400">Actualités</a>
+        <a href="index.html#contact" class="hover:text-brand-400">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl md:text-4xl font-bold">Informations</h1>
+    <p class="mt-3 text-white/70 max-w-3xl">Présentation des services, processus d’onboarding (KYC/AML), garde et sécurité, reporting, frais, et coordonnées officielles.</p>
+
+    <section class="mt-8 grid md:grid-cols-2 gap-6">
+      <article class="bg-white/5 border border-white/10 rounded-2xl p-6"><h2 class="font-semibold text-lg">Onboarding & Conformité</h2><p class="mt-2 text-white/70 text-sm">Étapes KYC/AML, documentation requise, délais moyens.</p></article>
+      <article class="bg-white/5 border border-white/10 rounded-2xl p-6"><h2 class="font-semibold text-lg">Garde & Sécurité</h2><p class="mt-2 text-white/70 text-sm">Cold storage, MPC, procédures internes, audits.</p></article>
+      <article class="bg-white/5 border border-white/10 rounded-2xl p-6"><h2 class="font-semibold text-lg">Frais & Reporting</h2><p class="mt-2 text-white/70 text-sm">Structure de frais, périodicité des rapports, métriques suivies.</p></article>
+      <article class="bg-white/5 border border-white/10 rounded-2xl p-6"><h2 class="font-semibold text-lg">Contacts Officiels</h2><p class="mt-2 text-white/70 text-sm">Emails, canaux privilégiés, horaires.</p></article>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/10 py-8 text-xs text-white/60 text-center">© <span id="y"></span> WealthElite — NY / Dubai</footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
