@@ -6,13 +6,14 @@
   <title>Histoire – Janssen Trust</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-[#0b1220] text-white">
+<body class="bg-[#0b1220] text-white pb-16">
   <div class="bg-black/30 border-b border-white/10 text-center text-sm py-2">WealthElite — NY / Dubai · Janssen Trust</div>
   <header class="border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-3 font-semibold">
-        <img src="assets/wealth_elite_logo.png" class="h-8" alt="Logo"/>
-        <span class="hidden sm:inline opacity-70">NY / Dubai</span>
+        <img src="assets/papillon_pict.webp" class="h-7 w-auto" alt="Papillon"/>
+        <span class="text-white/90">Janssen Trust</span>
+        <span class="hidden sm:inline text-white/50">· WealthElite NY / Dubai</span>
       </a>
       <nav class="hidden md:flex items-center gap-8 text-sm">
         <a href="informations.html" class="hover:text-brand-400">Informations</a>
@@ -26,54 +27,32 @@
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <h1 class="text-3xl md:text-4xl font-bold">Histoire de Janssen Trust</h1>
     <p class="mt-3 text-white/70 max-w-3xl">Journal / autobiographie quotidienne (politique, philanthropie, superyachts, vécu).</p>
-
-    <!-- FEED SUPABASE -->
     <section id="feed" class="mt-8 space-y-6"></section>
   </main>
 
   <footer class="border-t border-white/10 py-8 text-xs text-white/60 text-center">© <span id="y"></span> WealthElite — NY / Dubai</footer>
+
+  <!-- TICKER -->
+  <div class="fixed inset-x-0 bottom-0 z-50">
+    <div class="backdrop-blur bg-black/40 border-t border-white/10">
+      <div class="tradingview-widget-container" style="height:46px;">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+{"symbols":[{"proName":"FOREXCOM:XAUUSD","title":"Gold"},{"proName":"BITSTAMP:BTCUSD","title":"BTC"},{"proName":"COINBASE:ETHUSD","title":"ETH"},{"proName":"OANDA:SPX500USD","title":"S&P 500"},{"proName":"FX_IDC:EURUSD","title":"EUR/USD"}],"showSymbolLogo":true,"isTransparent":true,"displayMode":"adaptive","colorTheme":"dark","locale":"fr"}
+        </script>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // Année dans le footer
     document.getElementById('y').textContent = new Date().getFullYear();
-
-    // -------- Supabase Feed --------
-    const SUPABASE_URL = "https://ywpshnlnbpyfplapzzac.supabase.co";       // <-- remplace
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl3cHNobmxuYnB5ZnBsYXB6emFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcyODg1NTYsImV4cCI6MjA3Mjg2NDU1Nn0.J-0ATeb3dxkQ6m4E0KuDLOHD072akgielLKQb-m22B8";                     // <-- remplace
-    const CATEGORY = "bio";                                        // histoire = bio
-
-    async function loadPosts() {
-      const url = `${SUPABASE_URL}/rest/v1/posts?select=*&category=eq.${CATEGORY}&order=created_at.desc`;
-      const res = await fetch(url, {
-        headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` }
-      });
-      const posts = await res.json();
-      renderPosts(posts);
-    }
-
-    function esc(s) {
-      return (s ?? "").toString().replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-    }
-
-    function renderPosts(posts) {
-      const root = document.getElementById('feed');
-      if (!posts.length) {
-        root.innerHTML = `<div class="text-white/60">Aucune page d’histoire publiée pour le moment.</div>`;
-        return;
-      }
-      root.innerHTML = posts.map(p => `
-        <article class="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h2 class="font-semibold text-lg">${esc(p.title || 'Entrée de journal')}</h2>
-          ${p.link_url ? `<p class="mt-2 text-sm"><a class="text-blue-300 underline break-all" href="${esc(p.link_url)}" target="_blank" rel="noopener">Lien</a></p>` : ``}
-          ${p.media_url ? `<img src="${esc(p.media_url)}" alt="" class="mt-3 rounded-xl w-full h-auto"/>` : ``}
-          ${p.content ? `<p class="mt-3 text-white/80 text-sm whitespace-pre-wrap">${esc(p.content)}</p>` : ``}
-          <div class="mt-4 flex items-center justify-between text-xs text-white/50">
-            <span>${new Date(p.created_at).toLocaleString('fr-BE')}</span>
-            <span>${esc(p.author || '—')}</span>
-          </div>
-        </article>
-      `).join('');
-    }
-
+    const SUPABASE_URL="https://ywpshnlnbpyfplapzzac.supabase.co";
+    const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl3cHNobmxuYnB5ZnBsYXB6emFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcyODg1NTYsImV4cCI6MjA3Mjg2NDU1Nn0.J-0ATeb3dxkQ6m4E0KuDLOHD072akgielLKQb-m22B8";
+    const CATEGORY="bio";
+    async function loadPosts(){const res=await fetch(`${SUPABASE_URL}/rest/v1/posts?select=*&category=eq.${CATEGORY}&order=created_at.desc`,{headers:{apikey:SUPABASE_ANON_KEY,Authorization:`Bearer ${SUPABASE_ANON_KEY}`}});renderPosts(await res.json());}
+    const esc=s=>(s??"").toString().replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    function renderPosts(posts){const root=document.getElementById('feed');if(!posts.length){root.innerHTML=`<div class="text-white/60">Aucune page d’histoire publiée pour le moment.</div>`;return;}
+      root.innerHTML=posts.map(p=>`<article class="bg-white/5 border border-white/10 rounded-2xl p-6"><h2 class="font-semibold text-lg">${esc(p.title||'Entrée de journal')}</h2>${p.link_url?`<p class="mt-2 text-sm"><a class="text-blue-300 underline break-all" href="${esc(p.link_url)}" target="_blank" rel="noopener">Lien</a></p>`:''}${p.media_url?`<img src="${esc(p.media_url)}" alt="" class="mt-3 rounded-xl w-full h-auto"/>`:''}${p.content?`<p class="mt-3 text-white/80 text-sm whitespace-pre-wrap">${esc(p.content)}</p>`:''}<div class="mt-4 flex items-center justify-between text-xs text-white/50"><span>${new Date(p.created_at).toLocaleString('fr-BE')}</span><span>${esc(p.author||'—')}</span></div></article>`).join('');}
     document.addEventListener('DOMContentLoaded', loadPosts);
   </script>
 </body>
