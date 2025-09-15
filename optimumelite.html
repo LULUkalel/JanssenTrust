@@ -43,7 +43,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
       <h1 class="text-3xl md:text-5xl font-bold">OptimumElite</h1>
       <p class="mt-4 text-white/70 max-w-3xl">Page dédiée à Pierre Janssen, Ambassadeur mondial. 
-      Ici seront publiées les annonces officielles liées au groupe Facebook et son partenariat.</p>
+      Annonces officielles liées au groupe Facebook et son partenariat.</p>
     </div>
   </section>
 
@@ -66,46 +66,7 @@
     </div>
   </div>
 
-  <script>
-    document.getElementById('y').textContent=new Date().getFullYear();
-
-    const SUPABASE_URL="https://ywpshnlnbpyfplapzzac.supabase.co";
-    const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...";
-    const esc=s=>(s??"").toString().replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-
-    async function loadPosts(){
-      const url=`${SUPABASE_URL}/rest/v1/posts?select=*&category=eq.optimumelite&order=created_at.desc`;
-      const res=await fetch(url,{headers:{apikey:SUPABASE_ANON_KEY,Authorization:`Bearer ${SUPABASE_ANON_KEY}`}});
-      const posts=await res.json();
-      const root=document.getElementById('feed-optimum');
-      if(!posts.length){root.innerHTML=`<div class="text-white/60">Aucune annonce publiée.</div>`;return;}
-      root.innerHTML=posts.map(p=>`
-        <article class="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h3 class="font-semibold text-lg">${esc(p.title||'Annonce')}</h3>
-          ${p.content?`<p class="mt-3 text-white/80 text-sm whitespace-pre-wrap">${esc(p.content)}</p>`:''}
-          ${p.media_url?`<img src="${esc(p.media_url)}" class="mt-3 rounded-xl w-full h-auto"/>`:''}
-          <div class="mt-4 text-xs text-white/50 flex justify-between">
-            <span>${new Date(p.created_at).toLocaleString('fr-BE')}</span><span>${esc(p.author||'—')}</span>
-          </div>
-        </article>`).join('');
-    }
-    document.addEventListener('DOMContentLoaded',loadPosts);
-
-    // TradingView ticker
-    (function(){
-      const c=document.querySelector('#tv-ticker .tradingview-widget-container');
-      const cfg={symbols:[
-        {proName:"FOREXCOM:XAUUSD",title:"Gold"},
-        {proName:"BITSTAMP:BTCUSD",title:"BTC"},
-        {proName:"COINBASE:ETHUSD",title:"ETH"},
-        {proName:"OANDA:SPX500USD",title:"S&P 500"},
-        {proName:"FX_IDC:EURUSD",title:"EUR/USD"}],
-        showSymbolLogo:true,isTransparent:true,displayMode:"adaptive",colorTheme:"dark",locale:"fr"};
-      const s=document.createElement('script');s.async=true;
-      s.src='https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
-      s.innerHTML=JSON.stringify(cfg);c.appendChild(s);
-    })();
-  </script>
+  <!-- JS central -->
   <script src="assets/js/app.js"></script>
 </body>
 </html>

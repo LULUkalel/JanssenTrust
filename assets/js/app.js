@@ -2,7 +2,7 @@
 //  CONFIG
 // ==========================
 const SUPABASE_URL = "https://ywpshnlnbpyfplapzzac.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl3cHNobmxuYnB5ZnBsYXB6emFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcyODg1NTYsImV4cCI6MjA3Mjg2NDU1Nn0.J-0ATeb3dxkQ6m4E0KuDLOHD072akgielLKQb-m22B8";
 const esc = s => (s ?? "").toString().replace(/[&<>"']/g, m =>
   ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])
 );

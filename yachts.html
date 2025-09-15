@@ -26,6 +26,7 @@
         <a href="crypto.html" class="hover:text-brand-400">Crypto</a>
         <a href="actualites.html" class="hover:text-brand-400">Actualités</a>
         <a href="yachts.html" class="text-brand-400">Super Yachts</a>
+        <a href="optimumelite.html" class="hover:text-brand-400">OptimumElite</a>
         <a href="index.html#contact" class="hover:text-brand-400">Contact</a>
       </nav>
     </div>
@@ -49,6 +50,7 @@
     © <span id="y"></span> WealthElite — NY / Dubai
   </footer>
 
+  <!-- TICKER -->
   <div id="tv-ticker" class="fixed inset-x-0 bottom-0 z-50">
     <div class="backdrop-blur bg-black/40 border-t border-white/10">
       <div class="tradingview-widget-container" style="height:46px;">
@@ -57,46 +59,7 @@
     </div>
   </div>
 
-  <script>
-    document.getElementById('y').textContent=new Date().getFullYear();
-
-    const SUPABASE_URL="https://ywpshnlnbpyfplapzzac.supabase.co";
-    const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl3cHNobmxuYnB5ZnBsYXB6emFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcyODg1NTYsImV4cCI6MjA3Mjg2NDU1Nn0.J-0ATeb3dxkQ6m4E0KuDLOHD072akgielLKQb-m22B8";
-    const esc=s=>(s??"").toString().replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-
-    async function loadPosts(){
-      const url=`${SUPABASE_URL}/rest/v1/posts?select=*&category=eq.bio&order=created_at.desc`;
-      const res=await fetch(url,{headers:{apikey:SUPABASE_ANON_KEY,Authorization:`Bearer ${SUPABASE_ANON_KEY}`}});
-      const posts=await res.json();
-      const root=document.getElementById('feed-bio');
-      if(!posts.length){root.innerHTML=`<div class="text-white/60">Aucune entrée publiée.</div>`;return;}
-      root.innerHTML=posts.map(p=>`
-        <article class="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h3 class="font-semibold text-lg">${esc(p.title||'Entrée de journal')}</h3>
-          ${p.link_url?`<p class="mt-2 text-sm"><a class="text-blue-300 underline break-all" href="${esc(p.link_url)}" target="_blank">Lien</a></p>`:''}
-          ${p.media_url?`<img src="${esc(p.media_url)}" alt="" class="mt-3 rounded-xl w-full h-auto"/>`:''}
-          ${p.content?`<p class="mt-3 text-white/80 text-sm whitespace-pre-wrap">${esc(p.content)}</p>`:''}
-          <div class="mt-4 flex items-center justify-between text-xs text-white/50">
-            <span>${new Date(p.created_at).toLocaleString('fr-BE')}</span><span>${esc(p.author||'—')}</span>
-          </div>
-        </article>`).join('');
-    }
-    document.addEventListener('DOMContentLoaded',loadPosts);
-
-    (function(){
-      const c=document.querySelector('#tv-ticker .tradingview-widget-container');
-      const cfg={symbols:[
-        {proName:"FOREXCOM:XAUUSD",title:"Gold"},
-        {proName:"BITSTAMP:BTCUSD",title:"BTC"},
-        {proName:"COINBASE:ETHUSD",title:"ETH"},
-        {proName:"OANDA:SPX500USD",title:"S&P 500"},
-        {proName:"FX_IDC:EURUSD",title:"EUR/USD"}],
-        showSymbolLogo:true,isTransparent:true,displayMode:"adaptive",colorTheme:"dark",locale:"fr"};
-      const s=document.createElement('script');s.async=true;
-      s.src='https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
-      s.innerHTML=JSON.stringify(cfg);c.appendChild(s);
-    })();
-  </script>
+  <!-- JS central -->
+  <script src="assets/js/app.js"></script>
 </body>
-<script src="assets/js/app.js"></script>
 </html>
