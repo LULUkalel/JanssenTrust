@@ -8,12 +8,27 @@
   <link rel="icon" href="https://fav.farm/🦋">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
+    /* Tailwind config (ok en CDN pour dev/local) */
     tailwind.config = { theme:{ extend:{
       colors:{ brand:{600:'#0c6cf3',500:'#2f87ff',400:'#5ea5ff'}, gold:{500:'#d4b559'}, dark:'#0b1220' },
       boxShadow:{ xlsoft:'0 25px 50px -12px rgba(0,0,0,.35)' }
     }}}
   </script>
   <style>html{scroll-behavior:smooth}</style>
+
+  <!-- DEV ONLY: masque l’avertissement Tailwind CDN dans la console -->
+  <script>
+    (function(){
+      const _warn = console.warn;
+      console.warn = function(...args){
+        const msg = args[0];
+        if (typeof msg === 'string' && msg.includes('cdn.tailwindcss.com should not be used in production')) {
+          return; // ignore le warning en local
+        }
+        _warn.apply(console, args);
+      };
+    })();
+  </script>
 </head>
 <body class="bg-dark text-white selection:bg-brand-500 selection:text-white pb-16">
   <!-- Top bar -->
@@ -237,37 +252,51 @@
     <div class="backdrop-blur bg-black/40 border-t border-white/10">
       <div class="tradingview-widget-container" style="height:46px;">
         <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-{
-  "symbols": [
-    {"proName":"FOREXCOM:XAUUSD","title":"Gold"},
-    {"proName":"TVC:USOIL","title":"WTI"},
-    {"proName":"BITSTAMP:BTCUSD","title":"BTC"},
-    {"proName":"COINBASE:ETHUSD","title":"ETH"},
-    {"proName":"BINANCE:BNBUSDT","title":"BNB"},
-    {"proName":"OANDA:SPX500USD","title":"S&P 500"},
-    {"proName":"OANDA:NAS100USD","title":"Nasdaq 100"},
-    {"proName":"FX_IDC:EURUSD","title":"EUR/USD"},
-    {"proName":"CRYPTOCAP:TOTAL","title":"Crypto Mkt Cap"},
-    {"proName":"TVC:DXY","title":"Dollar Index"}
-  ],
-  "showSymbolLogo": true,
-  "isTransparent": true,
-  "displayMode": "adaptive",
-  "colorTheme": "dark",
-  "locale": "fr"
-}
-        </script>
       </div>
     </div>
   </div>
 
   <script>
+    // Menu mobile + année dynamique
     const btn = document.getElementById('menuBtn');
     const menu = document.getElementById('mobileMenu');
     btn?.addEventListener('click', () => menu.classList.toggle('hidden'));
     menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.add('hidden')));
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Injection propre du widget TradingView pour éviter l’erreur `';' expected`
+    (function injectTradingViewTape(){
+      const container = document.querySelector('#tv-ticker .tradingview-widget-container');
+      if (!container) return;
+
+      const cfg = {
+        symbols: [
+          { proName:"FOREXCOM:XAUUSD", title:"Gold" },
+          { proName:"TVC:USOIL", title:"WTI" },
+          { proName:"BITSTAMP:BTCUSD", title:"BTC" },
+          { proName:"COINBASE:ETHUSD", title:"ETH" },
+          { proName:"BINANCE:BNBUSDT", title:"BNB" },
+          { proName:"OANDA:SPX500USD", title:"S&P 500" },
+          { proName:"OANDA:NAS100USD", title:"Nasdaq 100" },
+          { proName:"FX_IDC:EURUSD", title:"EUR/USD" },
+          { proName:"CRYPTOCAP:TOTAL", title:"Crypto Mkt Cap" },
+          { proName:"TVC:DXY", title:"Dollar Index" }
+        ],
+        showSymbolLogo: true,
+        isTransparent: true,
+        displayMode: "adaptive",
+        colorTheme: "dark",
+        locale: "fr"
+      };
+
+      const s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
+      // Important: TradingView lit le contenu texte du script pour récupérer la config
+      s.innerHTML = JSON.stringify(cfg);
+      container.appendChild(s);
+    })();
   </script>
 </body>
 </html>
