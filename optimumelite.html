@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Actualités – Blog · Janssen Trust</title>
-  <meta name="description" content="Briefs marchés, géopolitique et annonces internes. Janssen Trust · WealthElite.">
+  <title>OptimumElite — Janssen Trust</title>
+  <meta name="description" content="OptimumElite · Page dédiée à Pierre Janssen, Ambassadeur mondial du groupe officiel Facebook.">
   <link rel="icon" href="assets/papillon_pict.webp">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -14,41 +14,50 @@
   <style>html{scroll-behavior:smooth}</style>
 </head>
 <body class="bg-dark text-white pb-16">
+
+  <!-- TOP -->
   <div class="bg-black/30 border-b border-white/10 text-center text-sm py-2">WealthElite — NY / Dubai · Janssen Trust</div>
 
+  <!-- NAV -->
   <header class="sticky top-0 z-40 bg-dark/80 backdrop-blur border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-3 font-semibold">
-        <img src="assets/papillon_pict.webp" class="h-7 w-auto" alt="Papillon"/><span>Janssen Trust</span>
+        <img src="assets/papillon_pict.webp" class="h-7 w-auto" alt="Papillon"/>
+        <span class="text-white/90">Janssen Trust</span>
         <span class="hidden sm:inline text-white/50">· WealthElite NY / Dubai</span>
       </a>
       <nav class="hidden md:flex items-center gap-8 text-sm">
         <a href="crypto.html" class="hover:text-brand-400">Crypto</a>
-        <a href="actualites.html" class="text-brand-400">Actualités</a>
+        <a href="actualites.html" class="hover:text-brand-400">Actualités</a>
         <a href="yachts.html" class="hover:text-brand-400">Super Yachts</a>
+        <a href="optimumelite.html" class="text-brand-400">OptimumElite</a>
         <a href="index.html#contact" class="hover:text-brand-400">Contact</a>
       </nav>
     </div>
   </header>
 
+  <!-- HERO -->
   <section class="relative overflow-hidden">
     <div class="absolute -top-32 -right-32 h-80 w-80 bg-brand-600 rounded-full blur-3xl opacity-30"></div>
     <div class="absolute -bottom-32 -left-32 h-96 w-96 bg-gold-500 rounded-full blur-3xl opacity-20"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-      <h1 class="text-3xl md:text-5xl font-bold">Actualités — Blog</h1>
-      <p class="mt-4 text-white/70 max-w-3xl">Analyses rapides, géopolitique, annonces internes.</p>
+      <h1 class="text-3xl md:text-5xl font-bold">OptimumElite</h1>
+      <p class="mt-4 text-white/70 max-w-3xl">Page dédiée à Pierre Janssen, Ambassadeur mondial. 
+      Ici seront publiées les annonces officielles liées au groupe Facebook et son partenariat.</p>
     </div>
   </section>
 
+  <!-- FEED -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-xl font-semibold">Derniers posts</h2>
-    <section id="feed-news" class="mt-6 grid md:grid-cols-2 gap-6"></section>
+    <h2 class="text-xl font-semibold">Annonces officielles</h2>
+    <section id="feed-optimum" class="mt-6 grid md:grid-cols-2 gap-6"></section>
   </main>
 
   <footer class="border-t border-white/10 mt-16 py-8 text-xs text-white/60 text-center">
     © <span id="y"></span> WealthElite — NY / Dubai
   </footer>
 
+  <!-- TICKER -->
   <div id="tv-ticker" class="fixed inset-x-0 bottom-0 z-50">
     <div class="backdrop-blur bg-black/40 border-t border-white/10">
       <div class="tradingview-widget-container" style="height:46px;">
@@ -61,28 +70,28 @@
     document.getElementById('y').textContent=new Date().getFullYear();
 
     const SUPABASE_URL="https://ywpshnlnbpyfplapzzac.supabase.co";
-    const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl3cHNobmxuYnB5ZnBsYXB6emFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcyODg1NTYsImV4cCI6MjA3Mjg2NDU1Nn0.J-0ATeb3dxkQ6m4E0KuDLOHD072akgielLKQb-m22B8";
+    const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...";
     const esc=s=>(s??"").toString().replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 
     async function loadPosts(){
-      const url=`${SUPABASE_URL}/rest/v1/posts?select=*&category=eq.news&order=created_at.desc`;
+      const url=`${SUPABASE_URL}/rest/v1/posts?select=*&category=eq.optimumelite&order=created_at.desc`;
       const res=await fetch(url,{headers:{apikey:SUPABASE_ANON_KEY,Authorization:`Bearer ${SUPABASE_ANON_KEY}`}});
       const posts=await res.json();
-      const root=document.getElementById('feed-news');
-      if(!posts.length){root.innerHTML=`<div class="text-white/60">Aucune publication pour le moment.</div>`;return;}
+      const root=document.getElementById('feed-optimum');
+      if(!posts.length){root.innerHTML=`<div class="text-white/60">Aucune annonce publiée.</div>`;return;}
       root.innerHTML=posts.map(p=>`
         <article class="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h3 class="font-semibold text-lg">${esc(p.title||'Publication')}</h3>
-          ${p.link_url?`<p class="mt-2 text-sm"><a class="text-blue-300 underline break-all" href="${esc(p.link_url)}" target="_blank">Lien</a></p>`:''}
-          ${p.media_url?`<img src="${esc(p.media_url)}" alt="" class="mt-3 rounded-xl w-full h-auto"/>`:''}
+          <h3 class="font-semibold text-lg">${esc(p.title||'Annonce')}</h3>
           ${p.content?`<p class="mt-3 text-white/80 text-sm whitespace-pre-wrap">${esc(p.content)}</p>`:''}
-          <div class="mt-4 flex items-center justify-between text-xs text-white/50">
+          ${p.media_url?`<img src="${esc(p.media_url)}" class="mt-3 rounded-xl w-full h-auto"/>`:''}
+          <div class="mt-4 text-xs text-white/50 flex justify-between">
             <span>${new Date(p.created_at).toLocaleString('fr-BE')}</span><span>${esc(p.author||'—')}</span>
           </div>
         </article>`).join('');
     }
     document.addEventListener('DOMContentLoaded',loadPosts);
 
+    // TradingView ticker
     (function(){
       const c=document.querySelector('#tv-ticker .tradingview-widget-container');
       const cfg={symbols:[
