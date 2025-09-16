@@ -8,7 +8,7 @@ const esc = s => (s ?? "").toString().replace(/[&<>"']/g, m =>
 );
 
 // ==========================
-//  NAVIGATION (mobile)
+//  NAVIGATION (mobile) + INIT
 // ==========================
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("menuBtn");
@@ -30,6 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // injection ticker
   injectTradingViewTicker();
+
+  // init background vertical scroller
+  initBgVerticalScroller();
 });
 
 // ==========================
@@ -73,21 +76,94 @@ function renderPosts(posts, targetId){
 // ==========================
 //  TRADINGVIEW TICKER
 // ==========================
+// Injection TradingView — robuste (attend le partial et évite les doublons)
 function injectTradingViewTicker(){
-  const container = document.querySelector('#tv-ticker .tradingview-widget-container');
-  if (!container) return;
-  const cfg = {
-    symbols: [
-      {proName:"FOREXCOM:XAUUSD",title:"Gold"},
-      {proName:"BITSTAMP:BTCUSD",title:"BTC"},
-      {proName:"COINBASE:ETHUSD",title:"ETH"},
-      {proName:"OANDA:SPX500USD",title:"S&P 500"},
-      {proName:"FX_IDC:EURUSD",title:"EUR/USD"}
-    ],
-    showSymbolLogo:true,isTransparent:true,displayMode:"adaptive",colorTheme:"dark",locale:"fr"
+  // Empêche l’initialisation multiple
+  if (window.__tvTickerInitialized) return;
+
+  const tryInit = () => {
+    const container = document.querySelector('#tv-ticker .tradingview-widget-container');
+    if (!container) return false;
+
+    // Marque comme initialisé
+    window.__tvTickerInitialized = true;
+
+    const cfg = {
+      symbols: [
+        {proName:"FOREXCOM:XAUUSD",title:"Gold"},
+        {proName:"BITSTAMP:BTCUSD",title:"BTC"},
+        {proName:"COINBASE:ETHUSD",title:"ETH"},
+        {proName:"OANDA:SPX500USD",title:"S&P 500"},
+        {proName:"FX_IDC:EURUSD",title:"EUR/USD"}
+      ],
+      showSymbolLogo:true,isTransparent:true,displayMode:"adaptive",colorTheme:"dark",locale:"fr"
+    };
+
+    const s = document.createElement('script');
+    s.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
+    s.innerHTML = JSON.stringify(cfg);
+    container.appendChild(s);
+    return true;
   };
-  const s=document.createElement('script');
-  s.src='https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
-  s.innerHTML=JSON.stringify(cfg);
-  container.appendChild(s);
+
+  // 1) Essai immédiat
+  if (tryInit()) return;
+
+  // 2) Observe si le partial arrive ensuite
+  const obs = new MutationObserver(() => { if (tryInit()) obs.disconnect(); });
+  obs.observe(document.documentElement, { childList:true, subtree:true });
+
+  // 3) Filet de sécurité: quelques retries temporisés
+  let attempts = 0;
+  const id = setInterval(() => {
+    if (tryInit() || ++attempts > 20) clearInterval(id);
+  }, 150);
+}
+// ==========================
+//  BACKGROUND VERTICAL SCROLLER
+//  -> Seules les PHOTOS de fond se déplacent
+// ==========================
+function initBgVerticalScroller(){
+  const root = document.getElementById('bg-scroller');
+  if(!root) return;
+
+  const track = root.querySelector('.vtrack');
+  const imgs  = [...root.querySelectorAll('.bgimg')];
+  if(!track || !imgs.length) return;
+
+  // Étendre la piste si la page est longue (duplication simple)
+  const ensureLength = () => {
+    const docH = document.documentElement.scrollHeight || document.body.scrollHeight;
+    while (track.scrollHeight < docH * 1.3) {
+      imgs.forEach(img => track.appendChild(img.cloneNode(true)));
+    }
+  };
+  ensureLength();
+
+  // Parallax lent : le contenu de la page scrolle normalement,
+  // seule la PISTE en arrière-plan se déplace plus lentement.
+  const compute = () => {
+    const docH = document.documentElement.scrollHeight;
+    const winH = window.innerHeight || 1;
+    const maxScroll = Math.max(1, docH - winH);
+    const y = window.scrollY || 0;
+    const progress = y / maxScroll;
+
+    const trackH = track.scrollHeight;
+    const extra = Math.max(0, trackH - winH);
+    const ty = - extra * progress * 0.25;      // vitesse plus lente (parallax net)
+    track.style.transform = `translate(-50%, ${ty}px)`;
+    //track.style.transition = 'transform 60ms linear'; // inertie discrète
+  };
+
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { compute(); ticking = false; });
+  };
+
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', () => { ensureLength(); onScroll(); });
+  compute();
 }

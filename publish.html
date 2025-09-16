@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Publier · Janssen Trust</title>
+  <link rel="icon" href="assets/papillon_pict.webp">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config={theme:{extend:{colors:{brand:{600:'#0c6cf3',500:'#2f87ff',400:'#5ea5ff'},dark:'#0b1220'}}}}
+  </script>
+  <style>
+    body{background:#0b1220;color:#fff}
+    .card{backdrop-filter:blur(8px);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px}
+    label{font-size:.85rem;opacity:.8}
+    input, textarea{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:.8rem}
+    input:focus, textarea:focus{outline:none;border-color:#5ea5ff}
+  </style>
+</head>
+<body class="min-h-screen">
+  <div class="max-w-3xl mx-auto p-6">
+    <header class="mb-6 flex items-center gap-3">
+      <img src="assets/papillon_pict.webp" class="h-8" alt="">
+      <h1 class="text-2xl font-semibold">Publier — Super Yachts</h1>
+    </header>
+
+    <!-- Zone login -->
+    <section id="auth" class="card p-5 mb-6">
+      <h2 class="font-semibold mb-4">Connexion</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label>Email</label>
+          <input id="email" type="email" placeholder="pierre@exemple.com" class="w-full">
+        </div>
+        <div>
+          <label>Mot de passe</label>
+          <input id="password" type="password" placeholder="••••••••" class="w-full">
+        </div>
+      </div>
+      <div class="mt-4 flex gap-3">
+        <button id="btn-login" class="px-5 py-2 rounded-lg bg-brand-600 hover:bg-brand-500">Se connecter</button>
+        <button id="btn-logout" class="px-5 py-2 rounded-lg border border-white/15">Se déconnecter</button>
+      </div>
+      <p id="auth-status" class="mt-3 text-sm text-white/70"></p>
+    </section>
+
+    <!-- Formulaire publication -->
+    <section class="card p-5">
+      <h2 class="font-semibold mb-4">Nouvelle publication — catégorie <span class="font-mono">bio</span></h2>
+      <div class="grid gap-4">
+        <div>
+          <label>Titre</label>
+          <input id="title" type="text" placeholder="Ex. : L'ICON, 127 m — focus design">
+        </div>
+        <div>
+          <label>URL média (image)</label>
+          <input id="media_url" type="url" placeholder="https://…/photo.jpg">
+        </div>
+        <div>
+          <label>URL lien (facultatif)</label>
+          <input id="link_url" type="url" placeholder="https://…">
+        </div>
+        <div>
+          <label>Contenu</label>
+          <textarea id="content" rows="6" placeholder="Ton texte (histoire, specs, design, pourquoi c’est remarquable)…"></textarea>
+        </div>
+      </div>
+      <div class="mt-5 flex items-center justify-between">
+        <div class="text-sm text-white/60">La publication apparaîtra dans <strong>Super Yachts & Histoire</strong> (yachts.html).</div>
+        <button id="btn-publish" class="px-6 py-2 rounded-lg bg-brand-600 hover:bg-brand-500">Publier</button>
+      </div>
+      <p id="pub-status" class="mt-3 text-sm"></p>
+    </section>
+
+    <footer class="mt-8 text-center text-xs text-white/50">
+      <a href="yachts.html" class="underline">Voir la page Super Yachts</a>
+    </footer>
+  </div>
+
+  <!-- Supabase JS v2 -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/publish.js"></script>
+</body>
+</html>

@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <style>html{scroll-behavior:smooth}</style>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Merci – Janssen Trust</title>
+  <link rel="icon" href="assets/papillon_pict.webp">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = { theme:{ extend:{ 
-      colors:{brand:{600:'#0c6cf3',500:'#2f87ff',400:'#5ea5ff'}, gold:{500:'#d4b559'}, dark:'#0b1220'}, 
-      boxShadow:{xlsoft:'0 25px 50px -12px rgba(0,0,0,.35)'} 
-    }}}
-  </script>
-  <style>html{scroll-behavior:smooth}</style>
+  <script>tailwind.config={theme:{extend:{colors:{brand:{600:'#0c6cf3',500:'#2f87ff',400:'#5ea5ff'}, gold:{500:'#d4b559'}, dark:'#0b1220'}, boxShadow:{xlsoft:'0 25px 50px -12px rgba(0,0,0,.35)'}}}};</script>
 </head>
 <body class="bg-dark text-white min-h-screen flex items-center justify-center px-6 pb-16">
+  <div id="topbar"></div>
+  <div id="navbar"></div>
 
-  <!-- CONTENU -->
   <div class="max-w-lg text-center">
     <div class="flex items-center justify-center gap-3 mb-3">
       <img src="assets/papillon_pict.webp" alt="Papillon Janssen Trust" class="h-10 w-auto">
@@ -33,16 +30,10 @@
     </div>
   </div>
 
-  <!-- TICKER -->
-  <div id="tv-ticker" class="fixed inset-x-0 bottom-0 z-50">
-    <div class="backdrop-blur bg-black/40 border-t border-white/10">
-      <div class="tradingview-widget-container" style="height:46px;">
-        <div class="tradingview-widget-container__widget"></div>
-      </div>
-    </div>
-  </div>
+  <div id="footer"></div>
+  <div id="ticker"></div>
 
-  <!-- JS central -->
+  <script src="assets/js/includes.js"></script>
   <script src="assets/js/app.js"></script>
 </body>
 </html>

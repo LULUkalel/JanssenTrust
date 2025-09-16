@@ -4,38 +4,18 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Actualités – Blog · Janssen Trust</title>
-  <meta name="description" content="Briefs marchés, géopolitique et annonces internes. Janssen Trust · WealthElite.">
   <link rel="icon" href="assets/papillon_pict.webp">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config={theme:{extend:{colors:{brand:{600:'#0c6cf3',500:'#2f87ff',400:'#5ea5ff'},gold:{500:'#d4b559'},dark:'#0b1220'},boxShadow:{xlsoft:'0 25px 50px -12px rgba(0,0,0,.35)'}}}};
-    (function(){const w=console.warn;console.warn=function(m,...a){if(typeof m==='string'&&m.includes('cdn.tailwindcss'))return;w(m,...a)}})();
-  </script>
-  <style>html{scroll-behavior:smooth}</style>
+  <script>tailwind.config={theme:{extend:{colors:{brand:{600:'#0c6cf3',500:'#2f87ff',400:'#5ea5ff'},gold:{500:'#d4b559'},dark:'#0b1220'},boxShadow:{xlsoft:'0 25px 50px -12px rgba(0,0,0,.35)'}}}};</script>
+  <style>.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(60rem 40rem at 20% -10%,rgba(47,135,255,.18),transparent 60%),radial-gradient(80rem 50rem at 60% 120%,rgba(212,181,89,.12),transparent 60%);}</style>
 </head>
 <body class="bg-dark text-white pb-16">
-  <div class="bg-black/30 border-b border-white/10 text-center text-sm py-2">WealthElite — NY / Dubai · Janssen Trust</div>
+  <div id="topbar"></div>
+  <div id="navbar"></div>
 
-  <header class="sticky top-0 z-40 bg-dark/80 backdrop-blur border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3 font-semibold">
-        <img src="assets/papillon_pict.webp" class="h-7 w-auto" alt="Papillon"/><span>Janssen Trust</span>
-        <span class="hidden sm:inline text-white/50">· WealthElite NY / Dubai</span>
-      </a>
-      <nav class="hidden md:flex items-center gap-8 text-sm">
-        <a href="crypto.html" class="hover:text-brand-400">Crypto</a>
-        <a href="actualites.html" class="text-brand-400">Actualités</a>
-        <a href="yachts.html" class="hover:text-brand-400">Super Yachts</a>
-        <a href="optimumelite.html" class="hover:text-brand-400">OptimumElite</a>
-        <a href="index.html#contact" class="hover:text-brand-400">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="relative overflow-hidden">
-    <div class="absolute -top-32 -right-32 h-80 w-80 bg-brand-600 rounded-full blur-3xl opacity-30"></div>
-    <div class="absolute -bottom-32 -left-32 h-96 w-96 bg-gold-500 rounded-full blur-3xl opacity-20"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+  <section class="relative overflow-hidden py-20 md:py-28">
+    <div class="hero-bg"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <h1 class="text-3xl md:text-5xl font-bold">Actualités — Blog</h1>
       <p class="mt-4 text-white/70 max-w-3xl">Analyses rapides, géopolitique, annonces internes.</p>
     </div>
@@ -46,20 +26,10 @@
     <section id="feed-news" class="mt-6 grid md:grid-cols-2 gap-6"></section>
   </main>
 
-  <footer class="border-t border-white/10 mt-16 py-8 text-xs text-white/60 text-center">
-    © <span id="y"></span> WealthElite — NY / Dubai
-  </footer>
+  <div id="footer"></div>
+  <div id="ticker"></div>
 
-  <!-- TICKER -->
-  <div id="tv-ticker" class="fixed inset-x-0 bottom-0 z-50">
-    <div class="backdrop-blur bg-black/40 border-t border-white/10">
-      <div class="tradingview-widget-container" style="height:46px;">
-        <div class="tradingview-widget-container__widget"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- JS central -->
   <script src="assets/js/app.js"></script>
+  <script src="assets/js/includes.js"></script>
 </body>
 </html>

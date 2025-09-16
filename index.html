@@ -13,101 +13,103 @@
       boxShadow:{ xlsoft:'0 25px 50px -12px rgba(0,0,0,.35)' }
     }}}
   </script>
-  <style>html{scroll-behavior:smooth}</style>
+  <style>
+    html{scroll-behavior:smooth}
+
+    /* ===== Arrière-plan: galerie verticale (derrière tout) ===== */
+    #bg-scroller{
+      position:fixed; inset:0; z-index:-3;             /* bien derrière tout */
+      overflow:hidden; pointer-events:none; 
+      background:#0b1220;
+    }
+    #bg-scroller .vtrack{
+      position:absolute; left:50%; transform:translateX(-50%);
+      display:flex; flex-direction:column; gap:42px;
+      will-change:transform; padding:45vh 0;
+    }
+    /* PHOTOS PLUS GRANDES + COULEURS ATTIRANTES */
+    #bg-scroller .bgimg{
+      width:min(90vw, 1680px);
+      max-width:1680px;
+      aspect-ratio:16/9; object-fit:cover;
+      opacity:.22;
+      filter: saturate(145%) brightness(110%) contrast(102%) hue-rotate(8deg);
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,.07);
+      box-shadow:0 60px 140px -70px rgba(0,0,0,.55);
+    }
+    /* Vignette légère pour la lisibilité globale */
+    #bg-scroller .bg-vignette{
+      position:absolute; inset:-20vh -10vw; z-index:-2; pointer-events:none;
+      background: radial-gradient(1200px 600px at 50% 12%, rgba(0,0,0,.28), transparent 65%);
+    }
+
+    /* ===== Carte HÉRO ===== */
+    .glass{
+      position:relative; z-index:0;
+      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 30px 60px -20px rgba(0,0,0,.45);
+    }
+    .brand-gradient{
+      background:linear-gradient(90deg,#5ea5ff 0%,#2f87ff 40%,#d4b559 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent
+    }
+  </style>
 </head>
 <body class="bg-dark text-white selection:bg-brand-500 selection:text-white pb-16">
-
-  <!-- TOP -->
-  <div class="bg-black/30 border-b border-white/10 text-center text-sm py-2">
-    WealthElite — NY / Dubai · Janssen Trust
+  <!-- BACKGROUND VERTICAL GALLERY (derrière tout) -->
+  <div id="bg-scroller" aria-hidden="true">
+    <div class="bg-vignette"></div>
+    <div class="vtrack">
+      <!-- Remplace par tes images locales si tu veux -->
+      <img class="bgimg" src="https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=1600" alt="">
+      <img class="bgimg" src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600" alt="">
+      <img class="bgimg" src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1600" alt="">
+      <img class="bgimg" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1600" alt="">
+      <img class="bgimg" src="https://images.unsplash.com/photo-1549880338-65ddcdfd017b?q=80&w=1600" alt="">
+      <img class="bgimg" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600" alt="">
+    </div>
   </div>
 
-  <!-- NAV -->
-  <header class="sticky top-0 z-40 bg-dark/80 backdrop-blur border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-      <a href="index.html" class="flex items-center gap-3 font-semibold">
-        <img src="assets/papillon_pict.webp" class="h-7 w-auto" alt="Logo Janssen Trust">
-        <span class="text-white/90">Janssen Trust</span>
-      </a>
-      <nav class="hidden md:flex items-center gap-8 text-sm">
-        <a href="crypto.html" class="hover:text-brand-400">Crypto</a>
-        <a href="actualites.html" class="hover:text-brand-400">Actualités</a>
-        <a href="yachts.html" class="hover:text-brand-400">Super Yachts</a>
-        <a href="optimumelite.html" class="hover:text-brand-400">OptimumElite</a>
-        <a href="#contact" class="hover:text-brand-400">Contact</a>
-      </nav>
-    </div>
-  </header>
+  <!-- Partials -->
+  <div id="topbar"></div>
+  <div id="navbar"></div>
 
-  <!-- HERO -->
-  <section id="hero" class="relative overflow-hidden text-center py-20 md:py-28">
-    <div class="absolute -top-32 -right-32 h-80 w-80 bg-brand-600 rounded-full blur-3xl opacity-30"></div>
-    <div class="absolute -bottom-32 -left-32 h-96 w-96 bg-gold-500 rounded-full blur-3xl opacity-20"></div>
-    <div class="relative max-w-4xl mx-auto">
-      <img src="assets/papillon_pict.webp" alt="Papillon Janssen Trust" class="mx-auto h-16 mb-6">
-      <h1 class="text-4xl md:text-6xl font-bold"><span class="text-brand-400">Janssen</span> Trust</h1>
-      <p class="mt-4 text-lg md:text-2xl text-white/80">Construire un héritage de richesse et de confiance.</p>
-      <div class="mt-8 flex justify-center gap-4">
-        <a href="crypto.html" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500">Explorer Crypto</a>
-        <a href="#contact" class="px-6 py-3 rounded-xl border border-white/20 hover:bg-white/10">Nous contacter</a>
+  <!-- HÉRO sticky (la carte reste en place un moment) -->
+  <section id="hero" class="relative overflow-hidden text-center py-10 md:py-16">
+    <div class="relative max-w-4xl mx-auto px-4 min-h-[105vh] md:min-h-[115vh]">
+      <div class="md:sticky md:top-16">
+        <div class="glass rounded-3xl p-8 md:p-10">
+          <img src="assets/papillon_pict.webp" alt="Papillon Janssen Trust" class="mx-auto h-16 md:h-20 mb-5 opacity-90">
+          <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">
+            <span class="brand-gradient">Janssen</span> <span class="text-white/90">Trust</span>
+          </h1>
+
+          <div class="mt-6 rounded-2xl overflow-hidden bg-black/25 border border-white/10">
+            <img src="assets/pierre.jpg" alt="Portrait de Pierre Janssen" class="w-full h-auto object-contain">
+          </div>
+
+          <p class="mt-5 text-lg md:text-2xl text-white/80 italic">
+            « Bâtir la confiance, préserver la richesse. »
+          </p>
+
+          <div class="mt-8 flex justify-center gap-4">
+            <a href="crypto.html" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 shadow-xlsoft">Explorer Crypto</a>
+            <a href="#contact" class="px-6 py-3 rounded-xl border border-white/15 hover:bg-white/5">Nous contacter</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- À PROPOS -->
-  <section class="py-16 md:py-24 border-t border-white/10">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold">À propos</h2>
-      <p class="mt-4 text-white/70 leading-relaxed">
-        Janssen Trust est un pont entre l'investissement, la stratégie et la vision. 
-        À travers ses activités à New York et Dubai, Pierre Janssen et son équipe accompagnent 
-        les investisseurs et passionnés dans le domaine des cryptos, de la géopolitique et du luxe.
-      </p>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="py-16 md:py-24 border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold">Prise de contact</h2>
-      <form action="https://formsubmit.co/simonnetlucas@hotmail.com" method="POST"
-            class="mt-8 grid md:grid-cols-2 gap-6 max-w-3xl">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_subject" value="Lead site — Janssen Trust">
-        <input type="hidden" name="_next" value="merci.html">
-        <div class="flex flex-col gap-2">
-          <label class="text-sm text-white/70">Nom complet</label>
-          <input required name="Nom complet" type="text" class="px-0 py-3 bg-transparent border-b border-white/25 focus:border-white/60 outline-none"/>
-        </div>
-        <div class="flex flex-col gap-2">
-          <label class="text-sm text-white/70">Email</label>
-          <input required name="_replyto" type="email" class="px-4 py-3 rounded-xl bg-white/5 border border-white/10"/>
-        </div>
-        <div class="md:col-span-2 flex flex-col gap-2">
-          <label class="text-sm text-white/70">Message</label>
-          <textarea required name="Message" rows="5" class="px-4 py-3 rounded-xl bg-white/5 border border-white/10"></textarea>
-        </div>
-        <div class="md:col-span-2 flex justify-end">
-          <button type="submit" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500">Envoyer</button>
-        </div>
-      </form>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="border-t border-white/10 py-10 text-center text-xs text-white/50">
-    © <span id="year"></span> Janssen Trust — WealthElite NY / Dubai
-  </footer>
-
-  <!-- TICKER -->
-  <div id="tv-ticker" class="fixed inset-x-0 bottom-0 z-50">
-    <div class="backdrop-blur bg-black/40 border-t border-white/10">
-      <div class="tradingview-widget-container" style="height:46px;">
-        <div class="tradingview-widget-container__widget"></div>
-      </div>
-    </div>
-  </div>
+  <div id="about"></div>
+  <div id="contact-section"></div>
+  <div id="footer"></div>
+  <div id="ticker"></div>
 
   <script src="assets/js/app.js"></script>
+  <script src="assets/js/includes.js"></script>
 </body>
 </html>
