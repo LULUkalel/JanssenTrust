@@ -1,0 +1,27 @@
+﻿# Dépendances
+node_modules/
+.pnpm/
+
+# Build output
+dist/
+.vite/
+out/
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Env files (gardez .env.example)
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
