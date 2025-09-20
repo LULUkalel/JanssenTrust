@@ -1,7 +1,10 @@
 ﻿# Dépendances
 node_modules/
-.pnpm/
-
+.pnpm-store/
+.turbo/
+.next/
+dist/
+build/
 # Build output
 dist/
 .vite/
