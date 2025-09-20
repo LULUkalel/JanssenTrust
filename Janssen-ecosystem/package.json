@@ -1,0 +1,22 @@
+﻿{
+    "name":  "janssen-ecosystem",
+    "private":  true,
+    "version":  "0.1.0",
+    "packageManager":  "pnpm@10.17.0",
+    "dependencies":  {
+                         "@supabase/supabase-js":  "^2.57.4"
+                     },
+    "devDependencies":  {
+                            "concurrently":  "^9.0.0"
+                        },
+    "scripts":  {
+                    "dev:institute":  "pnpm -C apps/janssen-institute dev",
+                    "build:crypto":  "pnpm -C apps/crypto build",
+                    "build:superyachts":  "pnpm -C apps/superyachts build",
+                    "build:institute":  "pnpm -C apps/janssen-institute build",
+                    "dev:superyachts":  "pnpm -C apps/superyachts dev",
+                    "build:all":  "pnpm build:superyachts \u0026\u0026 pnpm build:crypto \u0026\u0026 pnpm build:institute",
+                    "dev:all":  "concurrently -n superyachts,crypto,institute -c green,cyan,magenta pnpm:\"-C apps/superyachts dev\" pnpm:\"-C apps/crypto dev\" pnpm:\"-C apps/janssen-institute dev\"",
+                    "dev:crypto":  "pnpm -C apps/crypto dev"
+                }
+}
